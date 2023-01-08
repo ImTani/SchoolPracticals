@@ -1,27 +1,33 @@
-w = input("Enter a word : ")
-vowelCount = 0
-consonantCount = 0
-upperCount = 0
-lowerCount = 0
-vowels = ('a', 'e', 'i', 'o', 'u')
-consonants = ('b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q',
-              'r', 's', 't', 'v', 'w', 'x', 'y', 'z')
+def count_letters(word):
+    vowel_count = 0
+    consonant_count = 0
+    upper_count = 0
+    lower_count = 0
+    vowels = ('a', 'e', 'i', 'o', 'u')
 
-for letter in w:
-    if letter.isupper():
-        upperCount += 1
-    if letter.islower():
-        lowerCount += 1
+    for letter in word:
+        if letter.isupper():
+            upper_count += 1
+        if letter.islower():
+            lower_count += 1
 
-w = w.lower()
+    word = word.lower()
 
-for letter in w:
-    if letter in vowels:
-        vowelCount += 1
-    if letter in consonants:
-        consonantCount += 1
+    for letter in word:
+        if letter.isalpha():
+            if letter in vowels:
+                vowel_count += 1
+            else:
+                consonant_count += 1
 
-print("The number of vowels is :", vowelCount)
-print("The number of consonants is :", consonantCount)
-print("The number of uppercase letters is :", upperCount)
-print("The number of lowercase letters is :", lowerCount)
+    return vowel_count, consonant_count, upper_count, lower_count
+
+
+def test_count_letters():
+    assert count_letters("Hello") == (2, 3, 1, 4)
+    assert count_letters("hElLo") == (2, 3, 2, 3)
+    assert count_letters("HELLO") == (2, 3, 5, 0)
+    assert count_letters("12345") == (0, 0, 0, 0)
+
+
+test_count_letters()
